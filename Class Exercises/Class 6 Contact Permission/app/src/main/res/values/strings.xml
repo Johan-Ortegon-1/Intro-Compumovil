@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ejercicio permisos basicos</string>
+    <string name="app_name">Ejercicio permiso de contactos</string>
     <string name="txt1Cont">CONTACTOS</string>
     <string name="txt2Came">CAMANARA</string>
 </resources>

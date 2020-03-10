@@ -7,20 +7,23 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Contacto extends AppCompatActivity {
     static final int CONTACTS = 1;
-    public TextView txtVCamara;
+    public ListView lVContactos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacto);
-        txtVCamara = findViewById(R.id.txtVCamara);
-        requestPermisision(this, Manifest.permission.WRITE_CONTACTS,
+        requestPermisision(this, Manifest.permission.READ_CONTACTS,
                 "Lo necesito, deja de negarte y damelo >:v!!",CONTACTS);
+        lVContactos = findViewById(R.id.lVContactos);
     }
     private void requestPermisision(Activity contexto, String permiso, String justificacion, int codigo)
     {
@@ -33,6 +36,10 @@ public class Contacto extends AppCompatActivity {
             }
             ActivityCompat.requestPermissions(contexto, new String[]{permiso},codigo);
         }
+        else
+        {
+            llenarListView();
+        }
     }
 
     public void onRequestPermissionsResult(int reqCode, String permisos[], int[] grantResul)
@@ -44,15 +51,22 @@ public class Contacto extends AppCompatActivity {
                 if(grantResul.length > 0 && grantResul[0] == PackageManager.PERMISSION_GRANTED)
                 {
                     Toast.makeText(getApplicationContext(),"Gracias joven :v", Toast.LENGTH_LONG).show();
-                    txtVCamara.setText("PERMISO CONCEDIDO");
-                    txtVCamara.setTextColor(ContextCompat.getColor(this, R.color.textColor2));
+
                 }
                 else
                 {
-                    txtVCamara.setText("LO DENEGASTE :,(");
-                    txtVCamara.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+                    llenarListView();
                 }
             }
         }
+    }
+
+    public void llenarListView()
+    {
+        String[] mProjection = new String[]{
+                ContactsContract.Profile._ID, ContactsContract.Profile.DISPLAY_NAME_PRIMARY
+        };
+        Cursor mCursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, mProjection,
+                null, null, null);
     }
 }
