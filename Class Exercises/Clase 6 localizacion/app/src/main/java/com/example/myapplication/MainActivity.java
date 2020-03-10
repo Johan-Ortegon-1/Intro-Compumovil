@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void activarCamara(View v)
     {
-        Intent intent = new Intent(MainActivity.this, Contacto.class);
+        Intent intent = new Intent(MainActivity.this, Camara.class);
         startActivity(intent);
     }
 }

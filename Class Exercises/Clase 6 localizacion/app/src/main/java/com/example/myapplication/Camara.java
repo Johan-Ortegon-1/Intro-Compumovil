@@ -11,16 +11,17 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Contacto extends AppCompatActivity {
-    static final int CONTACTS = 1;
+public class Camara extends AppCompatActivity {
+    static final int CAMERA = 2;
     public TextView txtVCamara;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacto);
-        txtVCamara = findViewById(R.id.txtVCamara);
-        requestPermisision(this, Manifest.permission.WRITE_CONTACTS,
-                "Lo necesito, deja de negarte y damelo >:v!!",CONTACTS);
+        setContentView(R.layout.activity_camara);
+
+        txtVCamara = findViewById(R.id.textVCamara);
+        requestPermisision(this, Manifest.permission.CAMERA,
+                "Quiero la camarita, deja de negarte y damela >:v!!",CAMERA);
     }
     private void requestPermisision(Activity contexto, String permiso, String justificacion, int codigo)
     {
@@ -39,7 +40,7 @@ public class Contacto extends AppCompatActivity {
     {
         switch(reqCode)
         {
-            case CONTACTS:
+            case CAMERA:
             {
                 if(grantResul.length > 0 && grantResul[0] == PackageManager.PERMISSION_GRANTED)
                 {
