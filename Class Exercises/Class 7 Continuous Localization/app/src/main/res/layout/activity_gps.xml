@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="TextView" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="TextView" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="TextView" />
 
     <TextView
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:textColor="#DA0303"
         android:text="TextView" />
 </LinearLayout>

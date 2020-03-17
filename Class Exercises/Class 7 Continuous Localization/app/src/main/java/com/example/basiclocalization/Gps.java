@@ -64,7 +64,7 @@ public class Gps extends AppCompatActivity {
                     txtVLat.setText("Latitud: " + String.valueOf(location.getLatitude()));
                     txtVAlt.setText("Altura: " + String.valueOf(location.getAltitude()));
                     txtVAeropuerto.setText("Distancia al Dorado: " + distance(location.getLatitude(),
-                            location.getLongitude(),latitud_Aeropuerto,longitud_Aeropuerto));
+                            location.getLongitude(),latitud_Aeropuerto,longitud_Aeropuerto) + "Km");
                 }
             }
         };
