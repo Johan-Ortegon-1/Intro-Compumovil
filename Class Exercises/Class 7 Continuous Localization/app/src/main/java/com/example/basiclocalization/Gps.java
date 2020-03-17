@@ -20,7 +20,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -50,25 +49,25 @@ public class Gps extends AppCompatActivity {
         txtVLat = findViewById(R.id.txtVLatitud);
         txtVAlt = findViewById(R.id.txtVAltitud);
         mLocationRequest = createLocationRequest();
-        mLocationCallback = new LocationCallback()
-        {
+        mLocationCallback = new LocationCallback(){
             @Override
             public void onLocationResult(LocationResult locationResult)
             {
                 Location location = locationResult.getLastLocation();
-                Log.i("Location", "Location updates in the callback: " + location);
+                Log.i("LOCATION","Location update in the callback: " + location);
                 if(location != null)
                 {
-                    txtVAlt.setText("Altitud: " + String.valueOf(location.getAltitude()));
+                    txtVLon.setText("Longitud: " + String.valueOf(location.getLongitude()));
                     txtVLat.setText("Latitud: " + String.valueOf(location.getLatitude()));
-                    txtVLon.setText("Altitud: " + String.valueOf(location.getLatitude()));
+                    txtVAlt.setText("Altura: " + String.valueOf(location.getAltitude()));
                 }
             }
         };
-//        if(requestPermisision(this, Manifest.permission.ACCESS_FINE_LOCATION, "Es necesario acceder a su localizacion", LOCATION_REQUEST))
-//        {
-//            usarGps();
-//        }
+
+        if(requestPermisision(this, Manifest.permission.ACCESS_FINE_LOCATION, "Es necesario acceder a su localizacion", LOCATION_REQUEST))
+        {
+            usarGps();
+        }
     }
 
     private void startLocationUpdates()
@@ -79,12 +78,14 @@ public class Gps extends AppCompatActivity {
             LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
             SettingsClient client = LocationServices.getSettingsClient(this);
             Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
             task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
                 @Override
                 public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                        startLocationUpdates();
+                    startLocationUpdates();
                 }
             });
+
             task.addOnFailureListener(this, new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -110,7 +111,10 @@ public class Gps extends AppCompatActivity {
 
     private void stopLocationUpdates()
     {
-        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+        if(mFusedLocationClient != null)
+        {
+            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+        }
     }
 
     @Override
@@ -185,6 +189,7 @@ public class Gps extends AppCompatActivity {
             }
         }
     }
+
     public void usarGps()
     {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
