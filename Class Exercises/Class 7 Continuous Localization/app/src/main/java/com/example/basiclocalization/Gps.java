@@ -39,7 +39,9 @@ public class Gps extends AppCompatActivity {
     private TextView txtVLon;
     private TextView txtVLat;
     private TextView txtVAlt;
-    static final int LOCATION_REQUEST = 1, REQUEST_CHECK_SETTINGS = 2;
+    private TextView txtVAeropuerto;
+    static final int LOCATION_REQUEST = 1, REQUEST_CHECK_SETTINGS = 2, RADIUS_OF_EARTH_KM = 6371;
+    static final double latitud_Aeropuerto = 4.697546, longitud_Aeropuerto = -74.141115;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -48,6 +50,7 @@ public class Gps extends AppCompatActivity {
         txtVLon = findViewById(R.id.txtVLongitud);
         txtVLat = findViewById(R.id.txtVLatitud);
         txtVAlt = findViewById(R.id.txtVAltitud);
+        txtVAeropuerto = findViewById(R.id.txtVDistAeropuerto);
         mLocationRequest = createLocationRequest();
         mLocationCallback = new LocationCallback(){
             @Override
@@ -60,6 +63,8 @@ public class Gps extends AppCompatActivity {
                     txtVLon.setText("Longitud: " + String.valueOf(location.getLongitude()));
                     txtVLat.setText("Latitud: " + String.valueOf(location.getLatitude()));
                     txtVAlt.setText("Altura: " + String.valueOf(location.getAltitude()));
+                    txtVAeropuerto.setText("Distancia al Dorado: " + distance(location.getLatitude(),
+                            location.getLongitude(),latitud_Aeropuerto,longitud_Aeropuerto));
                 }
             }
         };
@@ -190,6 +195,18 @@ public class Gps extends AppCompatActivity {
         }
     }
 
+    public double distance(double lat1, double long1, double lat2, double long2)
+    {
+        double latDistance = Math. toRadians (lat1-lat2);
+        double lngDistance = Math. toRadians (long1-long2);
+        double a = Math. sin(latDistance / 2 ) * Math. sin(latDistance / 2)
+            + Math.cos(Math. toRadians (lat1)) * Math.cos(Math.toRadians(lat2))
+            * Math.sin(lngDistance / 2)*Math.sin(lngDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double result = RADIUS_OF_EARTH_KM * c;
+        return Math.round(result*10000000.0)/10000000.0;
+    }
+
     public void usarGps()
     {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -217,5 +234,4 @@ public class Gps extends AppCompatActivity {
                     }
                 });
     }
-
 }
