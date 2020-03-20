@@ -71,6 +71,7 @@ public class Gps extends AppCompatActivity {
 
         if(requestPermisision(this, Manifest.permission.ACCESS_FINE_LOCATION, "Es necesario acceder a su localizacion", LOCATION_REQUEST))
         {
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
             usarGps();
         }
     }
@@ -80,37 +81,6 @@ public class Gps extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this ,Manifest.permission. ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)
         {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
-            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
-            SettingsClient client = LocationServices.getSettingsClient(this);
-            Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-
-            task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-                @Override
-                public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                    startLocationUpdates();
-                }
-            });
-
-            task.addOnFailureListener(this, new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    int statusCode = ((ApiException) e).getStatusCode();
-                    switch(statusCode)
-                    {
-                        case CommonStatusCodes.RESOLUTION_REQUIRED:
-                            try{
-                                ResolvableApiException resolvable = (ResolvableApiException) e;
-                                resolvable.startResolutionForResult(Gps.this, REQUEST_CHECK_SETTINGS);
-                            }catch(IntentSender.SendIntentException sendEx)
-                            {
-                            }
-                            break;
-
-                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                            break;
-                    }
-                }
-            });
         }
     }
 
@@ -146,15 +116,49 @@ public class Gps extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        startLocationUpdates();
+        settingsLocation();
     }
+
     @Override
     protected void onPause()
     {
         super.onPause();
         stopLocationUpdates();
     }
+    public void settingsLocation()
+    {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
+        SettingsClient client = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
 
+        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                startLocationUpdates();
+            }
+        });
+
+        task.addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                int statusCode = ((ApiException) e).getStatusCode();
+                switch(statusCode)
+                {
+                    case CommonStatusCodes.RESOLUTION_REQUIRED:
+                        try{
+                            ResolvableApiException resolvable = (ResolvableApiException) e;
+                            resolvable.startResolutionForResult(Gps.this, REQUEST_CHECK_SETTINGS);
+                        }catch(IntentSender.SendIntentException sendEx)
+                        {
+                        }
+                        break;
+
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        break;
+                }
+            }
+        });
+    }
     private LocationRequest createLocationRequest()
     {
         LocationRequest mLocationRequest = new LocationRequest();
@@ -222,6 +226,8 @@ public class Gps extends AppCompatActivity {
                             txtVLon.setText("Longitud:" + location.getLongitude());
                             txtVLat.setText("Latitud:" + location.getLatitude());
                             txtVAlt.setText("Altitud:" + location.getAltitude());
+                            txtVAeropuerto.setText("Distancia al Dorado: " + distance(location.getLatitude(),
+                                    location.getLongitude(),latitud_Aeropuerto,longitud_Aeropuerto) + "Km");
                             Log. i (" LOCATION ", "Longitud:" + location.getLongitude());
                             Log. i (" LOCATION ", "Latitud:" + location.getLatitude());
                         }
@@ -230,6 +236,7 @@ public class Gps extends AppCompatActivity {
                             txtVLon.setText("Something goes wrong" );
                             txtVLat.setText("Something goes wrong");
                             txtVAlt.setText("Something goes wrong");
+                            txtVAeropuerto.setText("Something goes wrong");
                         }
                     }
                 });
