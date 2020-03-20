@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Continuous Localization</string>
+    <string name="txtVLocalizaciones">Localizaciones guardadas</string>
+    <string name="btnAgregarLoc">Agregar Localización</string>
 </resources>

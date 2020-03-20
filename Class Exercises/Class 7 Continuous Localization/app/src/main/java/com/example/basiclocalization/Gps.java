@@ -13,6 +13,9 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,10 +35,24 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Gps extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
+    private Location locacionActual;
+    private JSONArray localizaciones;
+    private ListView listVLocalizaciones;
+    private ArrayAdapter adaptador;
+    private ArrayList<String> arreglo;
     private TextView txtVLon;
     private TextView txtVLat;
     private TextView txtVAlt;
@@ -51,6 +68,11 @@ public class Gps extends AppCompatActivity {
         txtVLat = findViewById(R.id.txtVLatitud);
         txtVAlt = findViewById(R.id.txtVAltitud);
         txtVAeropuerto = findViewById(R.id.txtVDistAeropuerto);
+        localizaciones = new JSONArray();
+        listVLocalizaciones = findViewById(R.id.listVLocalizaciones);
+        arreglo = new ArrayList<>();
+        adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arreglo);
+        listVLocalizaciones.setAdapter(adaptador);
         mLocationRequest = createLocationRequest();
         mLocationCallback = new LocationCallback(){
             @Override
@@ -60,6 +82,7 @@ public class Gps extends AppCompatActivity {
                 Log.i("LOCATION","Location update in the callback: " + location);
                 if(location != null)
                 {
+                    locacionActual = location;
                     txtVLon.setText("Longitud: " + String.valueOf(location.getLongitude()));
                     txtVLat.setText("Latitud: " + String.valueOf(location.getLatitude()));
                     txtVAlt.setText("Altura: " + String.valueOf(location.getAltitude()));
@@ -223,6 +246,7 @@ public class Gps extends AppCompatActivity {
                         Log. i ("LOCATION","onSuccess location");
                         if (location != null )
                         {
+                            locacionActual = location;
                             txtVLon.setText("Longitud:" + location.getLongitude());
                             txtVLat.setText("Latitud:" + location.getLatitude());
                             txtVAlt.setText("Altitud:" + location.getAltitude());
@@ -240,5 +264,40 @@ public class Gps extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void agregarLocalizacion(View v)
+    {
+        writeJSONObject();
+    }
+
+    public void writeJSONObject()
+    {
+        Locacion miLocaclizacion = new Locacion();
+        miLocaclizacion.setFecha(new Date(System.currentTimeMillis()));
+        miLocaclizacion.setLatitud(locacionActual.getLatitude());
+        miLocaclizacion.setLongitud(locacionActual.getLongitude());
+        localizaciones.put(miLocaclizacion.toJSON());
+        Writer output = null;
+        String filename = "localizaciones.json";
+        /*Escritura del listView*/
+        String nuevoLog;
+        nuevoLog = new String(miLocaclizacion.getFecha()  + "\n"
+                + "Latitud: " + miLocaclizacion.getLatitud() + " Longitud: " + miLocaclizacion.getLongitud());
+        arreglo.add(nuevoLog);
+        adaptador.notifyDataSetChanged();
+        try
+        {
+            File file = new File(getBaseContext().getExternalFilesDir(null),filename);
+            Log.i("LOCATION", "Ubicacion de archivo :" + file);
+            output = new BufferedWriter(new FileWriter(file));
+            output.write(localizaciones.toString());
+            output.close();
+            Toast.makeText(getBaseContext(), "Localizaciones salvadas", Toast.LENGTH_LONG).show();
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

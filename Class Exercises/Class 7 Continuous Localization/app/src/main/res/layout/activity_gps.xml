@@ -41,4 +41,25 @@
         android:textSize="25sp"
         android:textColor="#DA0303"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtVUbicaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="@string/txtVLocalizaciones" />
+
+    <ListView
+        android:id="@+id/listVLocalizaciones"
+        android:layout_width="match_parent"
+        android:layout_height="450dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="agregarLocalizacion"
+        android:text="@string/btnAgregarLoc" />
 </LinearLayout>
