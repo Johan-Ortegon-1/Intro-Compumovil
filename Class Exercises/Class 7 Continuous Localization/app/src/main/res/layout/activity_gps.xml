@@ -54,7 +54,7 @@
     <ListView
         android:id="@+id/listVLocalizaciones"
         android:layout_width="match_parent"
-        android:layout_height="450dp" />
+        android:layout_height="408dp" />
 
     <Button
         android:id="@+id/button"
