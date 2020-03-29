@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LocalizacionContactosAlmacenamiento</string>
+    <string name="txt1Cont">CONTACTOS</string>
+    <string name="txt2Came">CAMANARA</string>
+    <string name="txtbtnCame1">Seleccionar una imagen</string>
+    <string name="txtbtnCame2">Desplegar la cámara</string>
+    <string name="title_activity_mapa">Map</string>
+</resources>
