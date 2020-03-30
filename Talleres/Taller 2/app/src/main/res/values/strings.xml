@@ -5,4 +5,5 @@
     <string name="txtbtnCame1">Seleccionar una imagen</string>
     <string name="txtbtnCame2">Desplegar la cámara</string>
     <string name="title_activity_mapa">Map</string>
+    <string name="edtMapa">Buscar...</string>
 </resources>

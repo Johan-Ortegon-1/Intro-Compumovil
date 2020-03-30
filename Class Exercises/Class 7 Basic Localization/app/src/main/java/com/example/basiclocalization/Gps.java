@@ -50,6 +50,7 @@ public class Gps extends AppCompatActivity {
         txtVLat = findViewById(R.id.txtVLatitud);
         txtVAlt = findViewById(R.id.txtVAltitud);
         mLocationRequest = createLocationRequest();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mLocationCallback = new LocationCallback()
         {
             @Override
@@ -65,10 +66,6 @@ public class Gps extends AppCompatActivity {
                 }
             }
         };
-//        if(requestPermisision(this, Manifest.permission.ACCESS_FINE_LOCATION, "Es necesario acceder a su localizacion", LOCATION_REQUEST))
-//        {
-//            usarGps();
-//        }
     }
 
     private void startLocationUpdates()
@@ -105,6 +102,9 @@ public class Gps extends AppCompatActivity {
                     }
                 }
             });
+        }
+        else{
+            requestPermisision(this,Manifest.permission.ACCESS_FINE_LOCATION,"Y Aja!", LOCATION_REQUEST);
         }
     }
 
@@ -173,18 +173,19 @@ public class Gps extends AppCompatActivity {
 
     public void onRequestPermissionsResult(int reqCode, String permisos[], int[] grantResul)
     {
-        switch (reqCode)
-        {
-            case LOCATION_REQUEST:
+            switch (reqCode)
             {
-                if(grantResul.length > 0 && grantResul[0] == PackageManager.PERMISSION_GRANTED)
+                case LOCATION_REQUEST:
                 {
-                    usarGps();
+                    if(grantResul.length > 0 && grantResul[0] == PackageManager.PERMISSION_GRANTED)
+                    {
+                        startLocationUpdates();
+                    }
+                    break;
                 }
-                break;
             }
         }
-    }
+
     public void usarGps()
     {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);

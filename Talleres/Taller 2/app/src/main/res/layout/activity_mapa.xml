@@ -7,4 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Mapa"
-    tools:layout="@layout/contenerdor_mapa" />
+    tools:layout="@layout/contenerdor_mapa">
+    <EditText
+        android:id="@+id/edtBuscarDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/edtMapa"
+        android:layout_marginTop="65dp"
+        android:background="@color/transparente1"/>
+</fragment>
