@@ -279,7 +279,7 @@ public class Gps extends AppCompatActivity {
         miLocaclizacion.setLongitud(locacionActual.getLongitude());
         localizaciones.put(miLocaclizacion.toJSON());
         Writer output = null;
-        String filename = "localizaciones.json";
+        String filename = "locations.json";
         /*Escritura del listView*/
         String nuevoLog;
         nuevoLog = new String(miLocaclizacion.getFecha()  + "\n"

@@ -1,11 +1,13 @@
 package com.example.localizacioncontactosalmacenamiento;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
@@ -23,8 +25,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,7 +46,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -48,7 +62,9 @@ public class Mapa extends FragmentActivity  implements OnMapReadyCallback {
     /*Localization things*/
     private double latitud;
     private double longitud;
-    static final int LOCATION_REQUEST = 8;
+    static final int LOCATION_REQUEST = 8, REQUEST_CHECK_SETTINGS = 1;
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
 
     /*Light sensors*/
     SensorManager sensorManager;
@@ -73,6 +89,24 @@ public class Mapa extends FragmentActivity  implements OnMapReadyCallback {
         setContentView(R.layout.activity_mapa);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //Get current location
+        mLocationRequest = createLocationRequest();
+        mLocationCallback = new LocationCallback(){
+            @Override
+            public void onLocationResult(LocationResult locationResult)
+            {
+                Location location = locationResult.getLastLocation();
+                Log.i("LOCATION","Location update in the callback: " + location);
+                if(location != null)
+                {
+                    if(location.getLatitude() != latitud || location.getLongitude()!= longitud)
+                    {
+                        latitud = location.getLatitude();
+                        longitud = location.getLongitude();
+                        actualizarMapa();
+                    }
+                }
+            }
+        };
         if(requestPermisision(this, Manifest.permission.ACCESS_FINE_LOCATION, "Lo necesita la App", LOCATION_REQUEST))
             usarGps();
 
@@ -157,12 +191,74 @@ public class Mapa extends FragmentActivity  implements OnMapReadyCallback {
     {
         super.onResume();
         sensorManager.registerListener(lightSensorListener, lightSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        settingsLocation();
     }
     @Override
     protected void onPause()
     {
         super.onPause();
         sensorManager.unregisterListener(lightSensorListener);
+        stopLocationUpdates();
+    }
+
+    private void stopLocationUpdates()
+    {
+        if(mFusedLocationClient != null)
+        {
+            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+        }
+    }
+
+    public void settingsLocation()
+    {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
+        SettingsClient client = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
+        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                startLocationUpdates();
+            }
+        });
+
+        task.addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                int statusCode = ((ApiException) e).getStatusCode();
+                switch(statusCode)
+                {
+                    case CommonStatusCodes.RESOLUTION_REQUIRED:
+                        try{
+                            ResolvableApiException resolvable = (ResolvableApiException) e;
+                            resolvable.startResolutionForResult(Mapa.this, REQUEST_CHECK_SETTINGS);
+                        }catch(IntentSender.SendIntentException sendEx)
+                        {
+                        }
+                        break;
+
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        break;
+                }
+            }
+        });
+    }
+
+    private LocationRequest createLocationRequest()
+    {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        return mLocationRequest;
+    }
+
+    private void startLocationUpdates()
+    {
+        if(ContextCompat.checkSelfPermission(this ,Manifest.permission. ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED)
+        {
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+        }
     }
 
     private boolean requestPermisision(Activity contexto, String permiso, String justificacion, int codigo)
@@ -214,7 +310,7 @@ public class Mapa extends FragmentActivity  implements OnMapReadyCallback {
                         }
                         else
                         {
-                            Toast.makeText(getBaseContext(),"Something goes wrong!",Toast. LENGTH_LONG ).show();
+                            Toast.makeText(getBaseContext(),"Activa el GPS por favor :)!",Toast. LENGTH_LONG ).show();
                         }
                     }
                 });
@@ -249,7 +345,10 @@ public class Mapa extends FragmentActivity  implements OnMapReadyCallback {
             @Override
             public void onMapLongClick(LatLng latLng) {
                 mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(latLng).title(geoCoderSearchLatLang(latLng)));
+                LatLng bogota= new LatLng(latitud, longitud);
+                mMap.addMarker(new MarkerOptions().position(bogota).title("Localizacion actual"));
+                mMap.addMarker(new MarkerOptions().position(latLng).title(geoCoderSearchLatLang(latLng)).icon(
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory. HUE_BLUE)));
                 double distanciaObjetivo = distance(latitud, longitud, latLng.latitude, latLng.longitude);
                 Toast.makeText(Mapa.this, "Distancia al nuevo punto: " + distanciaObjetivo + " Km", Toast.LENGTH_LONG).show();
             }
@@ -295,7 +394,7 @@ public class Mapa extends FragmentActivity  implements OnMapReadyCallback {
         {
             LatLng bogota= new LatLng(latitud, longitud);
 
-            mMap.addMarker(new MarkerOptions().position(bogota).title("localizacion actual"));
+            mMap.addMarker(new MarkerOptions().position(bogota).title("Localizacion actual"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(bogota));
             mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         }

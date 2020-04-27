@@ -2,51 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0e30da6-0419-428d-bf9d-6f65078686ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/androidTest/java/com/example/localizacioncontactosalmacenamiento/ExampleInstrumentedTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/Camara.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/Contacto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/MainActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/drawable/contacts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/drawable/map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/layout/activity_camara.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/layout/activity_contacto.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/test/java/com/example/localizacioncontactosalmacenamiento/ExampleUnitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Class 8 Google M Basic/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Class 8 Google M Basic/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/Mapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/Mapa.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +38,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Class 8 Google M Basic" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
