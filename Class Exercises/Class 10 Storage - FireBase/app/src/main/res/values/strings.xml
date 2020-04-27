@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Firebase storage</string>
+    <string name="edtTUserName">Nombre de usuario</string>
+    <string name="edtTextPassword">Contraseña</string>
+    <string name="btnConectarse">Conectarse</string>
+    <string name="menuLogOut">Cerrar sesión</string>
+    <string name="btnRegister">Registrate</string>
+</resources>
