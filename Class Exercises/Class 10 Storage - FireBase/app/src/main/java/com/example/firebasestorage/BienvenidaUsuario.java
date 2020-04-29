@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,12 +29,21 @@ public class BienvenidaUsuario extends AppCompatActivity {
         txtVIdUser.setText(textTemp);
         mAuth = FirebaseAuth.getInstance();
     }
+
+    public void goMapa(View v)
+    {
+        Intent intent = new Intent(BienvenidaUsuario.this, LocalizacionesSimultaneas.class);
+        intent.putExtra("usuarioActual", user);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_personalizado, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

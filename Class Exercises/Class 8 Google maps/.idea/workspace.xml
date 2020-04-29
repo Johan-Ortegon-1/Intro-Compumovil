@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0e30da6-0419-428d-bf9d-6f65078686ed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/Mapa.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Talleres/Taller 2/app/src/main/java/com/example/localizacioncontactosalmacenamiento/Mapa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/debug/res/values/google_maps_api.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/java/com/example/firebasestorage/Libro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/java/com/example/firebasestorage/LocalizacionesSimultaneas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/java/com/example/firebasestorage/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/res/layout/activity_localizaciones_simultaneas.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/release/res/values/google_maps_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/java/com/example/firebasestorage/Registro.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/java/com/example/firebasestorage/Registro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/res/layout/activity_registro.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/res/layout/activity_registro.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Class 10 Storage - FireBase/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +46,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Class 8 Google M Basic" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
