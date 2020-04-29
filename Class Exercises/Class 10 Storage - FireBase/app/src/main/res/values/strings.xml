@@ -5,4 +5,14 @@
     <string name="btnConectarse">Conectarse</string>
     <string name="menuLogOut">Cerrar sesión</string>
     <string name="btnRegister">Registrate</string>
+    <string name="edtTFavoriteAuthor">Autor favorito</string>
+    <string name="title_activity_localizaciones_simultaneas">Map</string>
+    <string name="txt1Cont">CONTACTOS</string>
+    <string name="txt2Came">CAMANARA</string>
+    <string name="txtbtnCame1">Seleccionar una imagen</string>
+    <string name="txtbtnCame2">Desplegar la cámara</string>
+    <string name="title_activity_mapa">Map</string>
+    <string name="edtMapa">Buscar...</string>
+    <string name="btnMapa">Go al mapa</string>
+
 </resources>
